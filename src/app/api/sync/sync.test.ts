@@ -25,7 +25,7 @@ describe("GET /api/sync", () => {
 });
 
 describe("POST /api/sync", () => {
-  it("should return 200 and success message when data is valid", async () => {
+  it("should return 201 and success message when data is valid", async () => {
     const operation = {
       clientId: "test",
       cpuUsage: {
