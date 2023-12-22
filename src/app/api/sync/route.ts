@@ -1,7 +1,8 @@
 import { z } from "zod";
 
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { initializeDb } from "@/db/db";
+import { EventEmitter } from "stream";
 
 const schema = z.object({
   clientId: z.string(),
@@ -19,7 +20,7 @@ export async function GET() {
   return NextResponse.json({ items }, { status: 200 });
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   // Simulate random errors with 10% probability
   const randomNumber = Math.random();
   if (randomNumber < 0.1) {
@@ -28,9 +29,15 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-
+  // When running tests, req.body is an EventEmitter, not a JSON object thats why we need this check.
+  // In production, req.body is a JSON object.
+  let body = {};
+  if (req instanceof EventEmitter && req.body) {
+    body = req.body;
+  } else {
+    body = await req.json();
+  }
   const db = await initializeDb();
-  const body = await req.json();
   const parsedBody = schema.safeParse(body); // Validate the body, to make sure it has the expected structure
   if (!parsedBody.success) {
     return NextResponse.json(
@@ -48,7 +55,7 @@ export async function POST(req: Request) {
 
   return NextResponse.json(
     { status: "Success", message: "Data received" },
-    { status: 200 }
+    { status: 201 }
   );
 }
 

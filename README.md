@@ -48,6 +48,14 @@ This is a simple web application that monitors the CPU usage of the machine it i
 4. Open [http://localhost:3000](http://localhost:3000) with your browser to see
    the result.
 
+5. To run the tests
+
+   ```sh
+    npm run test
+    # or
+    yarn test
+   ```
+
 ### Usage 📖
 
 - You start by syncing 10 operations at a time by clicking the "Sync" button.
@@ -84,6 +92,8 @@ This is a simple web application that monitors the CPU usage of the machine it i
 - If the data can't be sent to the server after retrying 3 times, the data will be dequed from the queue. In real world scenario, if we have a native client we would want to store the data in a local database or a file and retry sending it to the server later. Otherwise, if we are using a web client, storing the data in web storage will lose us the data anyway if the user clears the browser cache or reboots.
 
 - I chose HTTP over WebSockets because I assumed that we do not need real-time data. And I added a timeout of one second between each request to the server for demonstration purposes. In real world scenario, I would remove the timeout and send the requests as fast as possible.
+
+- I made unit test for the API routes just to make sure that the API routes are working as expected. I did not make unit tests for the utility functions because they are very simple and they are not doing any complex logic.
 
 - "Empty Database" button is added for demonstration purposes.
 
