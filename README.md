@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center" style="margin-top: 120px">
+  <h3 align="center">Hive Streaming - Home Assignment</h3>
+</p>
 
-## Getting Started
+![HomePage](./screenshots/HomePage.png)
 
-First, run the development server:
+## About ℹ️
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This is a simple web application that monitors the CPU usage of the machine it is running on. It is built with Next.js, Tailwind CSS and SQLite.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Built with 🛠️
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [SQLite](https://www.sqlite.org/index.html)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Getting Started 🚀
 
-## Learn More
+### Requirements
 
-To learn more about Next.js, take a look at the following resources:
+- [Node.js](https://nodejs.org/en/) >= 18.0.0
+- [Yarn](https://yarnpkg.com/) >= 1.22.0
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Setup 🛠️
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Clone the repository
 
-## Deploy on Vercel
+   ```sh
+   git clone https://github.com/aghsa97/hive-streaming.git
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Install dependencies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```sh
+   npm install
+   # or
+    yarn
+   ```
+
+3. Start the development server
+
+   ```sh
+    npm run dev
+    # or
+    yarn dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see
+   the result.
+
+### Usage 📖
+
+- You start by syncing 10 operations at a time by clicking the "Sync" button.
+- You wait until syncing with the server is done. (You can follow up with the toasts that appear at the bottom of the screen)
+- You can then see the CPU usage data that got inserted into the database in the table.
+- You can also see the summary of Normal, High and Critical CPU usage in the summary section.
+- You can Empty the database by clicking the "Empty Database" button. (NOTE: This will delete all the data in the database).
+
+### Explanation of the code 📝
+
+- The front-end code is built with Next.js and Tailwind CSS. The front-end code is divided into 3 main sections:
+
+  - The `components` directory that contains all the components that are used in the application.
+  - The `layout.tsx` file that contains the layout of the application.
+  - The `page.tsx` file that contains the main page of the application.
+
+- The back-end code is built with Next.js and SQLite. The back-end code is divided into 2 main sections:
+
+  - The `app/api` directory that contains all the API routes that are used in the application.
+  - The `db.ts` file that contains the database connection and the database schema.
+
+  - The `src/utils` directory that contains all the utility functions -helper functions-s that are used in the application.
+
+### Choices I made 🤔
+
+- I mocked the data that is being displayed in the application because I did not have access to a real CPU usage data source. In a real world scenario, I would have build a native application (or used Electron) that would have been able to access the CPU usage data of the machine it is running on.
+
+- I picked React instead of Angular because I am more familiar with React and I have been using it for a while now. I would love to learn Angular in the future, but I did not have enough time to learn it for this assignment.
+
+- If the data in the body that is sent to the API is not valid, the API will return a 400 Bad Request response, and the data will be dequed from the queue. I assumed that we do not want to store invalid data in the database.
+
+- I chose to double the time between each retry because I do not want to send too many requests to the server if it is down.
+
+- If the data can't be sent to the server after retrying 3 times, the data will be dequed from the queue. In real world scenario, if we have a native client we would want to store the data in a local database or a file and retry sending it to the server later. Otherwise, if we are using a web client, storing the data in web storage will lose us the data anyway if the user clears the browser cache or reboots.
+
+- I chose HTTP over WebSockets because I assumed that we do not need real-time data. And I added a timeout of one second between each request to the server for demonstration purposes. In real world scenario, I would remove the timeout and send the requests as fast as possible.
+
+- "Empty Database" button is added for demonstration purposes.
+
+### Improvements 🤩
+
+- I would add a native client that would be able to access the CPU usage data of the machine it is running on.
+
+- Securing the API routes with authentication and authorization.
+
+- Adding unit tests and integration tests.
+
+## Contact ✉️
+
+- [LinkedIn](https://www.linkedin.com/in/mohammed-agha/)
+- [Email](mailto:mohammed.agha977@gmail.com)
