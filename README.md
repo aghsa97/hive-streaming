@@ -69,7 +69,7 @@ This is a simple web application that monitors the CPU usage of the machine it i
   - The `app/api` directory that contains all the API routes that are used in the application.
   - The `db.ts` file that contains the database connection and the database schema.
 
-  - The `src/utils` directory that contains all the utility functions -helper functions-s that are used in the application.
+- The `src/utils` directory that contains all the utility functions -helper functions-s that are used in the application.
 
 ### Choices I made 🤔
 
