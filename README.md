@@ -95,6 +95,8 @@ This is a simple web application that monitors the CPU usage of the machine it i
 
 - I made unit test for the API routes just to make sure that the API routes are working as expected. I did not make unit tests for the utility functions because they are very simple and they are not doing any complex logic.
 
+- I did some server load testing using [Artillery](https://artillery.io/) to make sure that the API routes are working as expected. The server load testing results are in the `report.json` file -behaivded relativly good-. (NOTE: I can talk more about it in the interview if you want).
+
 - "Empty Database" button is added for demonstration purposes.
 
 ### Improvements 🤩
