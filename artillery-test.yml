@@ -1,0 +1,15 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 10 # Test duration in seconds
+      arrivalRate: 100 # Users arriving per second
+
+scenarios:
+  - flow:
+      - post:
+          url: "/api/sync"
+          json:
+            clientId: "client_12415"
+            cpuUsage:
+              timestamp: 1625239073
+              load: 0.5
